@@ -4,9 +4,9 @@ var db = require('../config/db');
 var Entries = db.model('entries');
 
 /* GET users listing. */
-router.get('/:username', function(req, res, next) {
-Entries.find({"username":
-	{ "$regex":req.params.username , "$options": "i" }
+router.post('/', function(req, res, next) {
+Entries.find({username:
+	{ "$regex":req.body.searchbox , "$options": "i" }
 	}, 
 	function(err,results){
 	res.render('index',{entries:results})
