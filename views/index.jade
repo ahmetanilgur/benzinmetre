@@ -1,0 +1,36 @@
+extends layout
+
+block content
+  h1 GasolineMeter
+  p Here you can see gasoline consumptions of various car models
+  
+  form(action="/results" method="get")
+    label search: 
+    input(name="searchbox" type="text")
+    button(type="submit" name="action") Search
+  
+  ul
+  each entry in entries
+    tr(id="#{entry._id}")
+      li #{entry} - #{entry.brand} -  #{entry.model} -  #{entry.volume} - #{entry.liter}
+      
+  form(action="./" method="POST")
+    label username: 
+    input(name="username" type="text")
+    br
+    label brand: 
+    select(name="brand")
+      each entry in entries
+        option(value="#{entry.brand}") #{entry.brand}
+    br
+    label model: 
+    select(name="model")
+      each entry in entries
+        option(value="#{entry.model}") #{entry.model}
+    br
+    label volume: 
+    input(name="volume" type="text")
+    br
+    label liter per km: 
+    input(name="liter" type="text")
+    button(type="submit" name="action") Send 
